@@ -56,6 +56,7 @@ public class ContatoService {
             contato.setEmail(contatoAtualizado.getEmail());
             contato.setTelefone(contatoAtualizado.getTelefone());
             contato.setDataNascimento(contatoAtualizado.getDataNascimento());
+            contato.setUrlImagemPerfil(contatoAtualizado.getUrlImagemPerfil());
             return contatoRepository.save(contato);
         } else {
             throw new RuntimeException("Contato não encontrado para atualizar");
