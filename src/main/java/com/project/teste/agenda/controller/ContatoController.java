@@ -2,6 +2,7 @@ package com.project.teste.agenda.controller;
 
 import com.project.teste.agenda.model.Contato;
 import com.project.teste.agenda.service.ContatoService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/contatos")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class ContatoController {
 
     private final ContatoService contatoService;
@@ -62,7 +64,8 @@ public class ContatoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Contato criarContato(@RequestBody Contato contato) {
+    @ExceptionHandler
+    public Contato criarContato(@Valid @RequestBody Contato contato) {
         try {
             return contatoService.criarOuAtualizarContato(contato);
         } catch (Exception e) {
@@ -72,7 +75,8 @@ public class ContatoController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Contato atualizarContato(@PathVariable("id") Long id, @RequestBody Contato contatoAtualizado) {
+    @ExceptionHandler
+    public Contato atualizarContato(@PathVariable("id") Long id, @Valid @RequestBody Contato contatoAtualizado) {
         try {
             return contatoService.atualizarContato(id, contatoAtualizado);
         } catch (Exception e) {
