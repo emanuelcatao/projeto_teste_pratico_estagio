@@ -52,14 +52,27 @@ public class ContatoService {
         Optional<Contato> contatoExistente = contatoRepository.findContatoById(id);
         if (contatoExistente.isPresent()) {
             Contato contato = contatoExistente.get();
-            contato.setNome(contatoAtualizado.getNome());
-            contato.setEmail(contatoAtualizado.getEmail());
-            contato.setTelefone(contatoAtualizado.getTelefone());
-            contato.setDataNascimento(contatoAtualizado.getDataNascimento());
-            contato.setUrlImagemPerfil(contatoAtualizado.getUrlImagemPerfil());
+
+            if (contatoAtualizado.getNome() != null) {
+                contato.setNome(contatoAtualizado.getNome());
+            }
+            if (contatoAtualizado.getEmail() != null) {
+                contato.setEmail(contatoAtualizado.getEmail());
+            }
+            if (contatoAtualizado.getTelefone() != null) {
+                contato.setTelefone(contatoAtualizado.getTelefone());
+            }
+            if (contatoAtualizado.getDataNascimento() != null) {
+                contato.setDataNascimento(contatoAtualizado.getDataNascimento());
+            }
+            if (contatoAtualizado.getUrlImagemPerfil() != null) {
+                contato.setUrlImagemPerfil(contatoAtualizado.getUrlImagemPerfil());
+            }
+
             return contatoRepository.save(contato);
         } else {
             throw new RuntimeException("Contato não encontrado para atualizar");
         }
     }
+
 }
